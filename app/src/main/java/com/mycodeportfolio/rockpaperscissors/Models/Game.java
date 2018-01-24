@@ -5,13 +5,13 @@ import com.mycodeportfolio.rockpaperscissors.Enums.EnumMove;
 public class Game {
     private Player player;
     private Computer computer;
-    private int totalRounds;
-    private int currentRound;
+    private Integer totalRounds;
+    private Integer currentRound;
     private Player overallWinner;
 
-    public Game(Player player, Computer computer, int totalRounds) {
-        this.player = player;
-        this.computer = computer;
+    public Game(Integer totalRounds) {
+        this.player = new Player();
+        this.computer = new Computer();
         this.totalRounds = totalRounds > 0 ? totalRounds : 1;
         this.currentRound = 1;
     }
@@ -24,11 +24,11 @@ public class Game {
         return this.computer;
     }
 
-    public int getTotalRounds() {
+    public Integer getTotalRounds() {
         return this.totalRounds;
     }
 
-    public int getCurrentRound() {
+    public Integer getCurrentRound() {
         return this.currentRound;
     }
 
@@ -36,7 +36,17 @@ public class Game {
         this.currentRound +=1;
     }
 
+    public void decrementCurrentRound(){
+        this.currentRound -= 1;
+    }
+
+    public void setMoves(EnumMove move){
+        this.player.setMove(move);
+        this.computer.setRandomMove();
+    }
+
     public Player compareMoves(){
+        this.incrementCurrentRound();
         if (this.player.getMove() == this.computer.getMove()){
             return null;
         } else if (this.player.getMove() == EnumMove.ROCK && this.computer.getMove() == EnumMove.SCISSORS){

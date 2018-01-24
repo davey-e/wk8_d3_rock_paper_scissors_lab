@@ -20,13 +20,13 @@ public class PlayerTest {
 
     @Test
     public void hasScore(){
-        assertEquals(0,     player1.getScore());
+        assertEquals((Integer)0,     player1.getScore());
     }
 
     @Test
     public void canAddPoint(){
         player1.addPoint();
-        assertEquals(1,     player1.getScore());
+        assertEquals((Integer)1,     player1.getScore());
     }
 
     @Test

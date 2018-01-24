@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -18,24 +19,24 @@ public class GameTest {
     Player player;
     Computer computer;
     Game game;
-    int totalRounds;
+    Integer totalRounds;
 
     @Before
     public void before(){
         totalRounds = 1;
         player = new Player();
         computer = new Computer();
-        game = new Game(player, computer, totalRounds);
+        game = new Game(totalRounds);
     }
 
     @Test
     public void hasPlayer(){
-        assertEquals(player, game.getPlayer());
+        assertNotNull(game.getPlayer());
     }
 
     @Test
     public void hasComputer(){
-        assertEquals(computer, game.getComputer());
+        assertNotNull(game.getComputer());
     }
 
     @Test
@@ -45,57 +46,57 @@ public class GameTest {
 
     @Test
     public void hasCurrentRound(){
-        assertEquals(1, game.getCurrentRound());
+        assertEquals((Integer) 1, game.getCurrentRound());
     }
 
     @Test
     public void canIncrementCurrentRound(){
         game.incrementCurrentRound();
-        assertEquals(2, game.getCurrentRound());
+        assertEquals((Integer) 2, game.getCurrentRound());
     }
 
     @Test
     public void canCompareMoves_NoWinner(){
-        player.setMove(EnumMove.SCISSORS);
-        computer.setMove(EnumMove.SCISSORS);
+        game.getPlayer().setMove(EnumMove.SCISSORS);
+        game.getComputer().setMove(EnumMove.SCISSORS);
         assertNull(game.compareMoves());
     }
 
     @Test
     public void canCompareMoves_PlayerWins(){
-        player.setMove(EnumMove.SCISSORS);
-        computer.setMove(EnumMove.PAPER);
-        assertEquals(player, game.compareMoves());
-        assertEquals(1, player.getScore());
+        game.getPlayer().setMove(EnumMove.SCISSORS);
+        game.getComputer().setMove(EnumMove.PAPER);
+        assertEquals(game.getPlayer(), game.compareMoves());
+        assertEquals((Integer)1, game.getPlayer().getScore());
     }
 
     @Test
     public void canCompareMoves_ComputerWins(){
-        player.setMove(EnumMove.PAPER);
-        computer.setMove(EnumMove.SCISSORS);
-        assertEquals(computer, game.compareMoves());
-        assertEquals(1, computer.getScore());
+        game.getPlayer().setMove(EnumMove.PAPER);
+        game.getComputer().setMove(EnumMove.SCISSORS);
+        assertEquals(game.getComputer(), game.compareMoves());
+        assertEquals((Integer)1, game.getComputer().getScore());
     }
 
     @Test
     public void canGetOverAllWinner_PlayerIsWinner(){
-        player.setMove(EnumMove.SCISSORS);
-        computer.setMove(EnumMove.PAPER);
+        game.getPlayer().setMove(EnumMove.SCISSORS);
+        game.getComputer().setMove(EnumMove.PAPER);
         game.compareMoves();
-        assertEquals(player, game.getOverallWinner());
+        assertEquals(game.getPlayer(), game.getOverallWinner());
     }
 
     @Test
     public void canGetOverAllWinner_ComputerIsWinner(){
-        player.setMove(EnumMove.PAPER);
-        computer.setMove(EnumMove.SCISSORS);
+        game.getPlayer().setMove(EnumMove.PAPER);
+        game.getComputer().setMove(EnumMove.SCISSORS);
         game.compareMoves();
-        assertEquals(computer, game.getOverallWinner());
+        assertEquals(game.getComputer(), game.getOverallWinner());
     }
 
     @Test
     public void canDetermineIfGameIsFinished(){
-        Game game2 = new Game(player, computer, 2);
+        Game game2 = new Game(2);
         game2.incrementCurrentRound();
         assertFalse(game2.isGameFinished());
         game2.incrementCurrentRound();

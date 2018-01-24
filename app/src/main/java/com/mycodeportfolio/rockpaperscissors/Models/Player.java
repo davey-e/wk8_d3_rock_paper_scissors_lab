@@ -5,14 +5,14 @@ import com.mycodeportfolio.rockpaperscissors.Enums.EnumMove;
 
 public class Player {
 
-    private int score;
+    private Integer score;
     private EnumMove move;
 
     public Player(){
         this.score = 0;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return this.score;
     }
 
