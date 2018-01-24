@@ -1,7 +1,9 @@
-package com.mycodeportfolio.rockpaperscissors;
+package com.mycodeportfolio.rockpaperscissors.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.mycodeportfolio.rockpaperscissors.R;
 
 public class GameActivity extends AppCompatActivity {
 
