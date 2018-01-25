@@ -24,8 +24,8 @@ public class GameTest {
     @Before
     public void before(){
         totalRounds = 1;
-        player = new Player();
-        computer = new Computer();
+        player = new Player("Player");
+        computer = new Computer("Computer");
         game = new Game(totalRounds);
     }
 

@@ -15,12 +15,17 @@ public class PlayerTest {
 
     @Before
     public void before(){
-        player1 = new Player();
+        player1 = new Player("Player");
     }
 
     @Test
     public void hasScore(){
         assertEquals((Integer)0,     player1.getScore());
+    }
+
+    @Test
+    public void hasName(){
+        assertEquals("Player", player1.getName());
     }
 
     @Test

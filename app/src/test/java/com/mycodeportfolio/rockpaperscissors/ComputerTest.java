@@ -12,7 +12,7 @@ public class ComputerTest {
 
     @Test
     public void canSetRandomMove(){
-        computer1 = new Computer();
+        computer1 = new Computer("Computer");
         computer1.setRandomMove();
         assertNotNull(computer1.getMove());
     }

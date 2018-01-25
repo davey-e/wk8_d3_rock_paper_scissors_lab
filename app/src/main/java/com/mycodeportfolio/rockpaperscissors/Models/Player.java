@@ -7,13 +7,19 @@ public class Player {
 
     private Integer score;
     private EnumMove move;
+    private String name;
 
-    public Player(){
+    public Player(String name){
         this.score = 0;
+        this.name = name;
     }
 
     public Integer getScore() {
         return this.score;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public void addPoint() {

@@ -10,8 +10,8 @@ public class Game {
     private Player overallWinner;
 
     public Game(Integer totalRounds) {
-        this.player = new Player();
-        this.computer = new Computer();
+        this.player = new Player("Player");
+        this.computer = new Computer("Computer");
         this.totalRounds = totalRounds > 0 ? totalRounds : 1;
         this.currentRound = 1;
     }

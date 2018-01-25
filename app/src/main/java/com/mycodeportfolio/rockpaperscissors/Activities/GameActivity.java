@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mycodeportfolio.rockpaperscissors.Enums.EnumMove;
 import com.mycodeportfolio.rockpaperscissors.Models.Game;
+import com.mycodeportfolio.rockpaperscissors.Models.Player;
 import com.mycodeportfolio.rockpaperscissors.R;
 
 public class GameActivity extends AppCompatActivity {
@@ -25,8 +26,13 @@ public class GameActivity extends AppCompatActivity {
     TextView totalRounds;
     TextView playerScore;
     TextView computerScore;
+    TextView resultText;
+    Button rockButton;
+    Button paperButton;
+    Button scissorsButton;
     int numberOfRounds;
     Game game;
+    Player winner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,10 @@ public class GameActivity extends AppCompatActivity {
         totalRounds = findViewById(R.id.total_rounds);
         playerScore = findViewById(R.id.player_score);
         computerScore = findViewById(R.id.computer_score);
+        resultText = findViewById(R.id.result_text);
+        rockButton = findViewById(R.id.button_rock2);
+        paperButton = findViewById(R.id.button_paper2);
+        scissorsButton = findViewById(R.id.button_scissors);
 
     }
 
@@ -50,28 +60,35 @@ public class GameActivity extends AppCompatActivity {
         startContainer.setVisibility(View.INVISIBLE);
         gameContainer.setVisibility(View.VISIBLE);
         playerMovesContainer.setVisibility(View.VISIBLE);
+        computerContainer.setVisibility(View.VISIBLE);
+        rockButton.setVisibility(View.VISIBLE);
+        paperButton.setVisibility(View.VISIBLE);
+        scissorsButton.setVisibility(View.VISIBLE);
         game = new Game(numberOfRounds);
         updateRound();
     }
 
     public void updateRound(){
         if(game.isGameFinished()){
-            playerMovesContainer.setVisibility(View.INVISIBLE);
-            computerContainer.setVisibility(View.INVISIBLE);
             startContainer.setVisibility(View.VISIBLE);
+            rockButton.setVisibility(View.INVISIBLE);
+            paperButton.setVisibility(View.INVISIBLE);
+            scissorsButton.setVisibility(View.INVISIBLE);
+
             game.decrementCurrentRound();
         }
         currentRound.setText(game.getCurrentRound().toString());
         totalRounds.setText(game.getTotalRounds().toString());
         playerScore.setText(game.getPlayer().getScore().toString());
         computerScore.setText(game.getComputer().getScore().toString());
+//        resultText.setText(winner.getName().toString() + " won that round!");
     }
 
     public void onPlayerMoveClick(View button){
         EnumMove move = EnumMove.valueOf(button.getTag().toString());
         Log.d("Selected move", move.getLabel());
         game.setMoves(move);
-        game.compareMoves();
+        winner = game.compareMoves();
         updateRound();
     }
 
